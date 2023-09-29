@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby '3.0.2'
 
 gem 'money'
-gem 'rest-client'
+gem 'httpx'
 gem 'erb'
 gem 'json'
 gem 'sinatra'

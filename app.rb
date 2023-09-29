@@ -1,3 +1,5 @@
+require 'httpx'
+require 'json'
 require 'sinatra'
 require_relative 'app/index.rb'
 
