@@ -1,78 +1,82 @@
-require 'net/http'
+require 'rest-client'
 require 'json'
-require 'date'
+require_relative 'helpers/date'
+require_relative 'helpers/html'
 
 URL_BASE = 'https://www.buda.com/api/v2'
 
-# Get the date from one day ago in UNIX timestamp in milliseconds
-def timestampDayAgo
-  return (Date.today - 1).to_time.to_i * 1000
-end
-
 # Get the IDs of the transactional markets
 def getMarkets
-  uri = URI("#{URL_BASE}/markets")
-  response = Net::HTTP.get(uri)
-  return JSON.parse(response)['markets'].map { |market| market['id'] }
+  begin
+    res = RestClient.get("#{URL_BASE}/markets")
+    return JSON.parse(res)['markets'].map { |market| market['id'] }
+  rescue RestClient::ExceptionWithResponse => e
+    if e.response
+      e_message = JSON.parse(e.response)["message"]
+      puts "Error in the markets API call: #{e_message}"
+    else
+      puts "Generic error in the markets API call."
+    end
+  rescue JSON::ParserError => e
+    puts "Error processing markets API response as JSON: #{e.message}"
+  rescue => e
+    puts "An unknown error occurred in the markets API: #{e}"
+  end
 end
 
 # Gets the transactions of a market in the last 24 hours
 def getTransactionsAndValue24h(market)
-  uri = URI("#{URL_BASE}/markets/#{market}/trades?timestamp=#{timestampDayAgo}&limit=100")
-  res = Net::HTTP.get(uri)
-  entries = JSON.parse(res)['trades']['entries']
-  return entries.map { |transaction| {
-    timestamp: transaction[0].to_i,
-    amount: transaction[1].to_f,
-    price:  transaction[2].to_f,
-    direction: transaction[3],
-    value: transaction[1].to_f * transaction[2].to_f
-  }}
+  begin
+    res = RestClient.get("#{URL_BASE}/markets/#{market}/trades?timestamp=#{timestampDayAgo}&limit=100")
+    entries = JSON.parse(res)['trades']['entries']
+    return entries.map { |transaction| {
+      timestamp: transaction[0].to_i,
+      amount: transaction[1].to_f,
+      price:  transaction[2].to_f,
+      direction: transaction[3],
+      value: transaction[1].to_f * transaction[2].to_f
+    }}
+  rescue RestClient::ExceptionWithResponse => e
+    if e.response
+      e_message = JSON.parse(e.response)["message"]
+      puts "Error in the call to the trades API: #{e_message}"
+    else
+      puts "Generic error in the trades API call."
+    end
+  rescue JSON::ParserError => e
+    puts "Error processing trades API response as JSON: #{e.message}"
+  rescue => e
+    puts "An unknown error occurred in the trades API: #{e}"
+  end
 end
 
 # Get the highest value transaction in the last 24 hours
 def getHighestTransaction24h(market)
-  transactions = getTransactionsAndValue24h(market)
-  return transactions.max_by { |transaction| transaction[:value] }
+  begin
+    return getTransactionsAndValue24h(market).max_by { |transaction| transaction[:value] }
+  rescue => e
+    puts "Error obtaining the highest value transaction on the market #{market}: #{e}."
+  end
 end
 
 # Get the highest value transaction in the last 24 hours of all markets
 def getHighestTransactions24h
-  markets = getMarkets
-  return markets.map { |market| [market, getHighestTransaction24h(market)] }.to_h
+  begin
+    return getMarkets.map { |market| [market, getHighestTransaction24h(market)] }.to_h
+  rescue => e
+    puts "Error getting the highest value transactions from all markets in the last 24 hours: #{e}."
+  end
 end
 
 # Generate the HTML file with the information of the highest value transactions in the last 24 hours
 def generateReport
-  highest_transactions = getHighestTransactions24h
-  html_content = generateHTML(highest_transactions)
-  File.write('highest_transactions.html', html_content)
-  puts "Archivo 'highest_transactions.html' generado exitosamente."
-end
-
-# Generate the HTML with the information of the highest value transactions in the last 24 hours
-def generateHTML(highest_transactions)
-  <<~HTML
-    <html>
-      <head><title>Transacciones de Mayor Valor en Buda.com</title></head>
-      <body>
-        <h1>Transacciones de Mayor Valor en Buda.com (Últimas 24 horas)</h1>
-        <ul>
-          #{highest_transactions.map { |market, transaction|
-            <<~HTML
-              <li>
-                <strong>Mercado:</strong> #{market}<br>
-                <strong>Fecha:</strong> #{Time.at(transaction[:timestamp] / 1000)}<br>
-                <strong>Monto:</strong> #{transaction[:amount]}<br>
-                <strong>Precio:</strong> #{transaction[:price]}<br>
-                <strong>Valor:</strong> #{transaction[:value].round(2)}<br>
-              </li>
-            HTML
-          }.join("\n")}
-        </ul>
-      </body>
-    </html>
-  HTML
+  html_content = generateHTML(getHighestTransactions24h)
+  begin
+    File.write('highest_transactions_for_market.html', html_content)
+    puts "File 'highest_transactions_for_market.html' successfully generated."
+  rescue => e
+    puts "Error generating file 'highest_transactions_for_market.html': #{e}."
+  end
 end
 
 generateReport
