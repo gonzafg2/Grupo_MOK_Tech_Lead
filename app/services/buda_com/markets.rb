@@ -6,6 +6,8 @@ def getMarkets
 
     return JSON.parse(res)['markets'].map { |market| market['id'] }
   rescue => e
-    puts "An unknown error occurred in the markets API: #{e}"
+    puts "An unknown error occurred in the markets API: #{e} - Using mocked data."
+    # If service is down, the app will continue to work with data mocked in the file app/mocks/markets.json
+    return JSON.parse(File.read(File.join(__dir__, '..', '..', 'mocks', 'markets.json')))['markets'].map { |market| market['id'] }
   end
 end
