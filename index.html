@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Highest value transactions in the last 24 hours</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  </head>
+  <body>
+    <nav class="navbar bg-body-tertiary">
+      <div class="container-fluid">
+        <span class="navbar-brand mb-0 h1">Buda.com</span>
+      </div>
+    </nav>
+
+    <div class="container my-4">
+      <div class="row">
+        <div class="col-12">
+          <h1 class="text-center my-4">Highest Value Transactions on Buda.com (Last 24 hours)</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <p class="text-center">The following table shows the highest value transactions on Buda.com in the last 24 hours.</p>
+        </div>
+      </div>
+      <div class="row d-none">
+        <div class="col-12">
+          <p class="text-center">The information is updated every 5 minutes.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <p class="text-center">The information is obtained from the <a href="https://api.buda.com" target="_blank">Buda.com API</a>.</p>
+        </div>
+        <div class="col-6">
+          <p class="text-center">The source code of this page is available on <a href="#" target="_blank">GitHub</a>.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container my-5">
+      <div class="row">
+        <div class="col-12">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Market</th>
+              <th scope="col">Date</th>
+              <th scope="col">Direction</th>
+              <th scope="col">Amount</th>
+              <th scope="col">Price</th>
+              <th scope="col">Value</th>
+              </tr>
+          </thead>
+
+          <tbody>
+            
+            <tr>
+              <th scope="row">BTC-CLP</th>
+              <td>2023-09-27 21:07:51 -0300</td>
+              <td>sell</td>
+              <td>0.536</td>
+              <td>$237,732.91</td>
+              <td><strong>$127,424.8398</strong></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">BTC-COP</th>
+              <td>2023-09-27 10:04:23 -0300</td>
+              <td>buy</td>
+              <td>0.31133074</td>
+              <td>$1,056,848.75</td>
+              <td><strong>$329,029.5034</strong></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">ETH-CLP</th>
+              <td>2023-09-27 20:15:44 -0300</td>
+              <td>sell</td>
+              <td>6.8867</td>
+              <td>$14,380.34</td>
+              <td><strong>$99,033.0875</strong></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">ETH-BTC</th>
+              <td>2023-09-21 10:34:32 -0300</td>
+              <td>sell</td>
+              <td>6.5554</td>
+              <td>$0.0006</td>
+              <td><strong>$0.0039</strong></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">BTC-PEN</th>
+              <td>2023-09-26 16:55:35 -0300</td>
+              <td>sell</td>
+              <td>0.267104</td>
+              <td>$970.3289</td>
+              <td><strong>$259.1787</strong></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">ETH-PEN</th>
+              <td>2023-09-26 13:23:52 -0300</td>
+              <td>sell</td>
+              <td>4.517557</td>
+              <td>$59.0118</td>
+              <td><strong>$266.5892</strong></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">ETH-COP</th>
+              <td>2023-09-25 12:21:16 -0300</td>
+              <td>buy</td>
+              <td>0.8329</td>
+              <td>$62,514.95</td>
+              <td><strong>$52,068.7019</strong></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">BCH-BTC</th>
+              <td>2023-06-29 19:32:12 -0400</td>
+              <td>buy</td>
+              <td>2.73079391</td>
+              <td>$0.0001</td>
+              <td><strong>$0.0002</strong></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">BCH-CLP</th>
+              <td>2023-09-27 21:22:40 -0300</td>
+              <td>buy</td>
+              <td>47.24602201</td>
+              <td>$2,119.84</td>
+              <td><strong>$100,154.0073</strong></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">BCH-COP</th>
+              <td>2023-09-22 20:39:59 -0300</td>
+              <td>sell</td>
+              <td>0.99920949</td>
+              <td>$7,809.2955</td>
+              <td><strong>$7,803.1222</strong></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">BCH-PEN</th>
+              <td>2023-09-14 23:36:56 -0300</td>
+              <td>buy</td>
+              <td>2.841</td>
+              <td>$7.9998</td>
+              <td><strong>$22.7274</strong></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">BTC-ARS</th>
+              <td>2023-06-06 17:17:34 -0400</td>
+              <td>sell</td>
+              <td>0.0276166</td>
+              <td>$100,000.00</td>
+              <td><strong>$2,761.66</strong></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">ETH-ARS</th>
+              <td>2023-04-12 19:18:14 -0400</td>
+              <td>sell</td>
+              <td>0.242792698</td>
+              <td>$6,100.1011</td>
+              <td><strong>$1,481.06</strong></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">BCH-ARS</th>
+              <td>2023-06-01 00:53:50 -0400</td>
+              <td>buy</td>
+              <td>0.79322543</td>
+              <td>$520.00</td>
+              <td><strong>$412.4772</strong></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">LTC-BTC</th>
+              <td>2023-09-13 04:38:30 -0300</td>
+              <td>buy</td>
+              <td>67.3325</td>
+              <td>$0.00</td>
+              <td><strong>$0.0016</strong></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">LTC-CLP</th>
+              <td>2023-09-27 21:34:52 -0300</td>
+              <td>sell</td>
+              <td>167.67</td>
+              <td>$585.00</td>
+              <td><strong>$98,086.95</strong></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">LTC-COP</th>
+              <td>2023-09-26 16:09:56 -0300</td>
+              <td>buy</td>
+              <td>36.0121</td>
+              <td>$2,469.75</td>
+              <td><strong>$88,940.884</strong></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">LTC-PEN</th>
+              <td>2023-09-25 12:50:18 -0300</td>
+              <td>buy</td>
+              <td>6.18073926</td>
+              <td>$2.4456</td>
+              <td><strong>$15.1156</strong></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">LTC-ARS</th>
+              <td>2023-06-09 17:44:48 -0400</td>
+              <td>sell</td>
+              <td>5.95200002</td>
+              <td>$372.05</td>
+              <td><strong>$2,214.4416</strong></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">USDC-CLP</th>
+              <td>2023-09-27 18:26:47 -0300</td>
+              <td>buy</td>
+              <td>36822.040335</td>
+              <td>$9.1073</td>
+              <td><strong>$335,349.3679</strong></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">USDC-COP</th>
+              <td>2023-09-26 22:37:13 -0300</td>
+              <td>sell</td>
+              <td>5078.2761</td>
+              <td>$40.0901</td>
+              <td><strong>$203,588.5967</strong></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">USDC-PEN</th>
+              <td>2023-09-26 17:06:32 -0300</td>
+              <td>sell</td>
+              <td>72125.9509</td>
+              <td>$0.0387</td>
+              <td><strong>$2,791.2743</strong></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">USDC-ARS</th>
+              <td>2023-06-08 17:34:15 -0400</td>
+              <td>buy</td>
+              <td>359.121659</td>
+              <td>$4.7998</td>
+              <td><strong>$1,723.7121</strong></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">BTC-USDC</th>
+              <td>2023-09-18 21:46:54 -0300</td>
+              <td>sell</td>
+              <td>0.063</td>
+              <td>$268.4881</td>
+              <td><strong>$16.9148</strong></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">USDT-USDC</th>
+              <td>2023-09-26 16:04:23 -0300</td>
+              <td>buy</td>
+              <td>14716.403614</td>
+              <td>$0.01</td>
+              <td><strong>$147.0757</strong></td>
+            </tr>
+            
+          </tbody>
+        </table>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  </body>
+</html>

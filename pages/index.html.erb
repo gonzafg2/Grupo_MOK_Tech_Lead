@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Highest value transactions in the last 24 hours</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  </head>
+  <body>
+    <nav class="navbar bg-body-tertiary">
+      <div class="container-fluid">
+        <span class="navbar-brand mb-0 h1">Buda.com</span>
+      </div>
+    </nav>
+
+    <div class="container my-4">
+      <div class="row">
+        <div class="col-12">
+          <h1 class="text-center my-4">Highest Value Transactions on Buda.com (Last 24 hours)</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <p class="text-center">The following table shows the highest value transactions on Buda.com in the last 24 hours.</p>
+        </div>
+      </div>
+      <div class="row d-none">
+        <div class="col-12">
+          <p class="text-center">The information is updated every 5 minutes.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <p class="text-center">The information is obtained from the <a href="https://api.buda.com" target="_blank">Buda.com API</a>.</p>
+        </div>
+        <div class="col-6">
+          <p class="text-center">The source code of this page is available on <a href="#" target="_blank">GitHub</a>.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container my-5">
+      <div class="row">
+        <div class="col-12">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Market</th>
+              <th scope="col">Date</th>
+              <th scope="col">Direction</th>
+              <th scope="col">Amount</th>
+              <th scope="col">Price</th>
+              <th scope="col">Value</th>
+              </tr>
+          </thead>
+
+          <tbody>
+            <% 
+            require 'money'
+            Money.locale_backend = :currency
+            Money.default_infinite_precision = true
+            Money.rounding_mode = BigDecimal::ROUND_HALF_UP
+
+            highest_transactions.each do |market, transaction| 
+            %>
+            <tr>
+              <th scope="row"><%= market %></th>
+              <td><%= Time.at(transaction[:timestamp] / 1000) %></td>
+              <td><%= transaction[:direction] %></td>
+              <td><%= transaction[:amount] %></td>
+              <td><%= Money.from_cents(transaction[:price], 'USD').round(BigDecimal::ROUND_HALF_UP, 2).format %></td>
+              <td><strong><%= Money.from_cents(transaction[:value], 'USD').round(BigDecimal::ROUND_HALF_UP, 2).format %></strong></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  </body>
+</html>

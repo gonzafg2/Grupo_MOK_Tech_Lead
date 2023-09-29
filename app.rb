@@ -1,7 +1,7 @@
 require 'rest-client'
 require 'json'
+require 'erb'
 require_relative 'helpers/date'
-require_relative 'helpers/html'
 
 URL_BASE = 'https://www.buda.com/api/v2'
 
@@ -70,12 +70,15 @@ end
 
 # Generate the HTML file with the information of the highest value transactions in the last 24 hours
 def generateReport
-  html_content = generateHTML(getHighestTransactions24h)
+  template_html = File.read('pages/index.html.erb')
+  template = ERB.new(template_html)
+  highest_transactions = getHighestTransactions24h
+  html_content = template.result(binding)
   begin
-    File.write('highest_transactions_for_market.html', html_content)
-    puts "File 'highest_transactions_for_market.html' successfully generated."
+    File.write('index.html', html_content)
+    puts "File 'index.html' successfully generated."
   rescue => e
-    puts "Error generating file 'highest_transactions_for_market.html': #{e}."
+    puts "Error generating file 'index.html': #{e}."
   end
 end
 
