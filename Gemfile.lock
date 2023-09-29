@@ -51,6 +51,7 @@ DEPENDENCIES
   json
   money
   puma
+  rack
   rest-client
   sinatra
 
