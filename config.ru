@@ -1,1 +1,3 @@
-run proc app.rb
+require './app'
+
+run Sinatra::Application

@@ -76,7 +76,7 @@ def generateReport
   template = ERB.new(template_html)
   highest_transactions = getHighestTransactions24h
   html_content = template.result(binding)
-  route_html = File.join(root, 'views' , 'index.html')
+  route_html = File.join(root, 'public' , 'index.html')
   begin
     File.write(route_html, html_content)
     puts "File 'index.html' successfully generated."

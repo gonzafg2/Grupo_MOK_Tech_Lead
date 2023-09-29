@@ -6,6 +6,8 @@ configure do
   puts "Initializing app..."
 end
 
+set :public_folder, 'app/public'
+
 get '/' do
-  send_file 'app/views/index.html'
+  send_file File.expand_path('index.html', settings.public_folder)
 end
