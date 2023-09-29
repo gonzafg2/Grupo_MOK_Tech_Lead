@@ -1,3 +1,1 @@
-require './app'
-
-run App
+run proc app.rb
