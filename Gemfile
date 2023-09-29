@@ -5,3 +5,6 @@ gem 'rest-client'
 gem 'erb'
 gem 'json'
 gem 'sinatra'
+gem 'puma'
+
+ruby "3.0.2"
