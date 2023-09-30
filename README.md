@@ -3,13 +3,14 @@
 _An application developed with Ruby to determine the highest value transactions in the last 24 hours in the regional cryptocurrency industry._
 
 The application has a custom architecture organized within the app folder as follows:
-**app/**
-**-----database/**: Contains the responses of the cached API.
-**-----helpers/**: Contains date and date files. templates with ERB.
-**-----mocks/**: Contains json files with the mocked responses of the services.
-**-----public/**: Contains the img, icons and html files generated from the server's public folder
-**-----services/**: Contains calls to APIs of external services.
-**-----views/**: Contains the views of the application.
+
+- **app/**
+- **-----database/**: Contains the responses of the cached API.
+- **-----helpers/**: Contains date and date files. templates with ERB.
+- **-----mocks/**: Contains json files with the mocked responses of the services.
+- **-----public/**: Contains the img, icons and html files generated from the server's public folder
+- **-----services/**: Contains calls to APIs of external services.
+- **-----views/**: Contains the views of the application.
 
  It should be noted that the code is made based on the **functional paradigm**.
 
