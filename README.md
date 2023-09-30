@@ -2,15 +2,33 @@
 
 _An application developed with Ruby to determine the highest value transactions in the last 24 hours in the regional cryptocurrency industry._
 
-Puedes ingresar desde estos links:
+The application has a custom architecture organized within the app folder as follows:
+**app/**
+**-----database/**: Contains the responses of the cached API.
+**-----helpers/**: Contains date and date files. templates with ERB.
+**-----mocks/**: Contains json files with the mocked responses of the services.
+**-----public/**: Contains the img, icons and html files generated from the server's public folder
+**-----services/**: Contains calls to APIs of external services.
+**-----views/**: Contains the views of the application.
+
+ It should be noted that the code is made based on the **functional paradigm**.
+
+ Error handling is also included in the API services, for this I include three levels:
+ - **First level**: If there was a previous response from the API, this will be saved within the database/cache/ folder to be later used in a subsequent query.
+ - **Second level**: If there has never been a response API success is read directly from mocked files simulating a correct response to the front.
+ - **Third level**: If there was a successful API response within the last 5 minutes, it will be saved within database/cache/. The system verifies that it has been created within this period of time, if so it will not call the API again, causing the response to be quickly obtained and rendered on the front, reducing loading problems and also avoiding falling into rules. of rate limit and bot score that the service could have. 
+ 
+ I preferred not to include a relational or non-relational database such as mysql or redis respectively so as not to increase the level of difficulty of the test so much.
+
+You can enter from these links:
 
 [https://highest-trades-buda-com-809bb4cac0c4.herokuapp.com/](https://highest-trades-buda-com-809bb4cac0c4.herokuapp.com/)
 or
 [https://ruby.flemingtechnologies.us/](https://ruby.flemingtechnologies.us/)
 
-![](https://firebasestorage.googleapis.com/v0/b/fleming-technologies.appspot.com/o/highest-trades-buda-app.jpeg?alt=media&token=59fd42e1-53a0-41ce-93e3-1881a3f3bcf2&_gl=1*guywne*_ga*MTE1NjMzNTkxOS4xNjkzOTU0NjQz*_ga_CW55HF8NVT*MTY5NjAzMTM3My4yMy4xLjE2OTYwMzE1MjguMzAuMC4w)
+![](https://firebasestorage.googleapis.com/v0/b/fleming-technologies.appspot.com/o/2023-09-30_15-06.jpeg?alt=media&token=062cd623-1557-462a-8549-42c124a872a3&_gl=1*pdmmrs*_ga*MTE1NjMzNTkxOS4xNjkzOTU0NjQz*_ga_CW55HF8NVT*MTY5NjA5NzgxOS4yNC4xLjE2OTYwOTc4NDAuMzkuMC4w)
 
-Los datos son públicos y son accedidos a través de:[https://api.buda.com/](https://api.buda.com/)
+The data is public and is accessed through:[https://api.buda.com/](https://api.buda.com/)
 
 ## Starting 🚀
 
@@ -36,7 +54,7 @@ gem install bundler
 
 ### Install 🔧
 
-_Antes de realizar la instalación verifica que tengas instalado correctamente Ruby, gem y bundle, de la siguiente forma:_
+Before installing, verify that you have Ruby, gem and bundle installed correctly, as follows:
 
 ```
 $ruby --version
