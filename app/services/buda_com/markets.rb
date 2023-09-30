@@ -4,6 +4,10 @@ def getMarkets
     res = HTTPX.get("#{URL_BASE}/markets")
     if res.status != 200 then raise "Error in the markets API call: #{res} with status #{res.status}" end
 
+    # Create a archive database/buda_com/cache/ if not exist
+    Dir.mkdir(File.join(__dir__, '..', '..', 'database')) unless Dir.exist?(File.join(__dir__, '..', '..', 'database'))
+    Dir.mkdir(File.join(__dir__, '..', '..', 'database', 'buda_com')) unless Dir.exist?(File.join(__dir__, '..', '..', 'database', 'buda_com'))
+    Dir.mkdir(File.join(__dir__, '..', '..', 'database', 'buda_com', 'cache')) unless Dir.exist?(File.join(__dir__, '..', '..', 'database', 'buda_com', 'cache'))
     # Create a json file with the last response from the API
     File.open(File.join(__dir__, '..', '..', 'database', 'buda_com', 'cache', 'markets.json'), 'w') { |file| file.write(res.to_s) }
     return JSON.parse(res)['markets'].map { |market| market['id'] }

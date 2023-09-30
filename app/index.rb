@@ -25,6 +25,11 @@ def getHighestTransactions24h
     if markets.nil? then raise "Error obtaining the markets." end
 
     highestTransactions24h = markets.map { |market| [market, getTransactionsAndValueInTime(market, timestampDayAgo).max_by { |transaction| transaction[:value] }] }.to_h
+    # Create a archive database/buda_com/cache/ if not exist
+    Dir.mkdir(File.join(__dir__, 'database')) unless Dir.exist?(File.join(__dir__, 'database'))
+    Dir.mkdir(File.join(__dir__, 'database', 'buda_com')) unless Dir.exist?(File.join(__dir__, 'database', 'buda_com'))
+    Dir.mkdir(File.join(__dir__, 'database', 'buda_com', 'cache')) unless Dir.exist?(File.join(__dir__, 'database', 'buda_com', 'cache'))
+
     # Create a json file with the highest value transactions in the last 24 hours
     File.open(File.join(__dir__, 'database', 'buda_com', 'cache', 'highest_transactions.json'), 'w') { |file| file.write(highestTransactions24h.to_json) }
     if highestTransactions24h.nil? then raise "Error obtaining the highest value transactions in the last 24 hours." end
